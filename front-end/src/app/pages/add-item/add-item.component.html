@@ -42,5 +42,8 @@
 
         <button style="margin-top: 20px" mat-raised-button color="primary" type="submit"
             [disabled]="addItemFormGroup.invalid">Add</button>
+        <div *ngIf="loading">
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
     </form>
 </div>

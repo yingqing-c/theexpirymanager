@@ -8,6 +8,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 const MATERIAL_MODULES = [
   MatToolbarModule,
@@ -19,6 +20,7 @@ const MATERIAL_MODULES = [
   MatMomentDateModule,
   MatSelectModule,
   MatTableModule,
+  MatProgressBarModule,
 ]
 
 @NgModule({

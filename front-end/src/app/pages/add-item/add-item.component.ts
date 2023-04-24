@@ -14,6 +14,7 @@ export class AddItemComponent implements OnInit {
   imageBlob!: Blob;
   imageData = "";
   imageUrl: any;
+  loading = false;
 
   constructor(private fb: FormBuilder, private expirySvc: ExpiryService) { }
 
@@ -42,11 +43,14 @@ export class AddItemComponent implements OnInit {
   }
 
   addItem() {
+    this.loading = true;
     this.expirySvc.addItem(this.imageBlob,
       this.name?.value,
       this.remarks?.value,
-      this.expiry?.value.toDate()).subscribe(res => { });
-    this.clearForm(this.addItemFormGroup);
+      this.expiry?.value.toDate()).subscribe(res => {
+        this.loading = false;
+        this.clearForm(this.addItemFormGroup);
+      });
   }
 
   clearForm(formGroup: FormGroup) {
