@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,7 @@ export class RegisterComponent {
   TITLE = "Register";
 
   constructor(private fb: FormBuilder,
-    private authService: AuthService) { }
+    private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.registerFormGroup = this.fb.group({
@@ -39,6 +40,7 @@ export class RegisterComponent {
     this.authService
       .register(this.email, this.username, this.password)
       .subscribe((res: string) => {
+        this.router.navigateByUrl("/login");
       })
     this.registerFormGroup.reset();
     Object.keys(this.registerFormGroup.controls).forEach((key) => {

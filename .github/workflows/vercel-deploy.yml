@@ -5,7 +5,6 @@ env:
 on:
   push:
     branches:
-      - testworkflow
       - main
 jobs:
   Deploy-Production:
