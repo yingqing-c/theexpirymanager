@@ -21,7 +21,10 @@ const routes: Routes = [
   },
   {
     path: 'list', component: ViewItemsComponent,
-  }
+  },
+  {
+    path: '', redirectTo: 'home', pathMatch: 'full',
+  },
 ];
 
 @NgModule({

@@ -30,7 +30,8 @@ export class AuthService {
 
   register(email: string, username: string, password: string): Observable<string> {
     return this.http.post<string>(
-      AUTH_ENDPOINT + "register", { "username": username, "password": password, "email": email }
+      AUTH_ENDPOINT + "register", { "username": username, "password": password, "email": email },
+      { headers: this.headers, responseType: "text" as "json" }
     )
   };
 

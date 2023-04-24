@@ -19,8 +19,8 @@
         <button style="margin-top: 20px" mat-raised-button color="primary" type="submit"
             [disabled]="registerFormGroup.invalid">{{ TITLE }}</button>
     </form>
-    <div *ngIf="registrationError">
-        <p class="error-msg"></p>
+    <div *ngIf="registrationError" class="alert alert-danger" role="alert">
+      {{ error }}
     </div>
 </div>
 

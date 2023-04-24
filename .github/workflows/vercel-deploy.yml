@@ -9,17 +9,17 @@ on:
 jobs:
   Deploy-Production:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./front-end
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
       - uses: actions/setup-node@v3
         with:
           node-version: 16
       # Install the node modules
       - name: NPM Install
         run: npm install
-      # Create production build
-      # - name: Production Build
-        # run: npm run build -- --prod # This is equivalent to 'ng build --prod'
       # Vercel
       - name: Install Vercel CLI
         run: npm install --global vercel@canary
