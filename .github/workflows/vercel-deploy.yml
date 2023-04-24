@@ -23,7 +23,7 @@ jobs:
         run: npm install
       # Create production build
       - name: Production Build
-        run: npm run build -- --prod # This is equivalent to 'ng build --prod'
+        run: npm run build
       # Vercel
       - name: Install Vercel CLI
         run: npm install --global vercel@canary
