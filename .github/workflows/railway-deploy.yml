@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - testworkflow
 
 jobs:
   deploy:
