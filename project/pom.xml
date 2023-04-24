@@ -134,13 +134,19 @@
 			<artifactId>maven-resources-plugin</artifactId>
 			<version>3.1.0</version>
 			<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
+				<archive>
+				<manifest>
+					<addClasspath>true</addClasspath>
+					<mainClass>com.example.demo.ProjectApplication</mainClass>
+				</manifest>
+				</archive>
+				<excludes>
+					<exclude>
+						<groupId>org.projectlombok</groupId>
+						<artifactId>lombok</artifactId>
+					</exclude>
+				</excludes>
+			</configuration>
 		</plugin>
 		</plugins>
 	</build>

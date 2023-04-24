@@ -62,17 +62,12 @@ public class WebSecurityConfig {
     public PasswordEncoder passwordEncoder() {
       return new BCryptPasswordEncoder();
     }
-
-    @Bean
-    CorsFilter corsFilter() {
-      CorsFilter filter = new CorsFilter();
-      return filter;
-    }
-
+    
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
       http.csrf().disable();
-      http.authorizeHttpRequests().requestMatchers("/","/*.js","/*.css","/favicon.ico","/index.html").permitAll()
+      http.authorizeHttpRequests()
+              // .requestMatchers("/","/*.js","/*.css","/favicon.ico","/index.html").permitAll()
               .requestMatchers("/oauth2/**","/login/oauth2/**", "/auth/login", "/auth/register").permitAll()
               .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // need this or all preflight requests will fail
               .anyRequest().authenticated().and()

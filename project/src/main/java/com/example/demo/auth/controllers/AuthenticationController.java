@@ -12,8 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
-
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/auth")
@@ -26,28 +24,22 @@ public class AuthenticationController {
     @Autowired
     private JwtUtils jwtService;
 
-    @GetMapping("/heartBeat")
-    public ResponseEntity<String> heartBeat(Principal principal) {
-        String newToken = jwtService.generateJwtToken(principal.getName());
-        return ResponseEntity.ok(newToken);
-    }
-
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody User user) {
         if (authenticationService.usernameExists(user.getUsername())) {
-            return ResponseEntity.badRequest().body("Username already exists");
+            return ResponseEntity.badRequest().body("{\"error\":\"Username already exists\"}");
         }
 
         if (authenticationService.emailExists(user.getEmail())) {
-            return ResponseEntity.badRequest().body("Email already exists");
+            return ResponseEntity.badRequest().body("{\"error\":\"Email already exists\"}");
         }
 
         boolean success = authenticationService.registerUser(user);
 
         if (success) {
-            return ResponseEntity.ok("Successfully created user!");
+            return ResponseEntity.ok("{\"msg\":\"Successfully created user!\"}");
         }
-        return ResponseEntity.internalServerError().body("User registration failed");
+        return ResponseEntity.internalServerError().body("{\"error\": \"User registration failed\"}");
     }
 
     @PostMapping("/login")
