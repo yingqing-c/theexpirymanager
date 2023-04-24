@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import 'rxjs/add/operator/catch';
+import { HttpErrorResponse } from '@angular/common/http';
+import { catchError, map } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -11,6 +14,7 @@ import { Router } from '@angular/router';
 export class RegisterComponent {
   registerFormGroup!: FormGroup;
   registrationError = false;
+  error = "";
   TITLE = "Register";
 
   constructor(private fb: FormBuilder,
@@ -38,10 +42,15 @@ export class RegisterComponent {
 
   register() {
     this.authService
-      .register(this.email, this.username, this.password)
-      .subscribe((res: string) => {
-        this.router.navigateByUrl("/login");
-      })
+      .register(this.email, this.username, this.password).subscribe(
+        data => {
+          this.router.navigateByUrl("/login");
+        },
+        error => {
+          this.registrationError = true;
+          this.error = error.message;
+        },
+      )
     this.registerFormGroup.reset();
     Object.keys(this.registerFormGroup.controls).forEach((key) => {
       const control = this.registerFormGroup.controls[key];

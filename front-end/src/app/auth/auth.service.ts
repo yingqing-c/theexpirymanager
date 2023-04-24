@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AUTH_ENDPOINT, LOGGED_IN_KEY, SERVER_ENDPOINT } from 'src/environment';
@@ -12,6 +12,7 @@ export class AuthService {
   private headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
   private logInStatus: BehaviorSubject<boolean>;
   public loginStatusObsv: Observable<boolean>;
+  private httpOptions = { headers: this.headers, responseType: "text" as "json" };
 
   constructor(private http: HttpClient) {
     let loggedIn = localStorage.getItem(LOGGED_IN_KEY);
@@ -25,7 +26,7 @@ export class AuthService {
 
 
   login(username: string, password: string): Observable<string> {
-    return this.http.post<string>(AUTH_ENDPOINT + "login", { "username": username, "password": password }, { headers: this.headers, responseType: "text" as "json" });
+    return this.http.post<string>(AUTH_ENDPOINT + "login", { "username": username, "password": password }, this.httpOptions);
   }
 
   register(email: string, username: string, password: string): Observable<string> {
