@@ -21,9 +21,6 @@ jobs:
       # Install the node modules
       - name: NPM Install
         run: npm install
-      # Create production build
-      - name: Production Build
-        run: npm run build
       # Vercel
       - name: Install Vercel CLI
         run: npm install --global vercel@canary
